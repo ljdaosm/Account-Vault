@@ -37,7 +37,7 @@ class popupWindow(object):
 
     def cleanup(self):
         self.value = self.e.get()
-        access = ''
+        access = 'password'
 
         if self.value == access:
             self.loop = True
@@ -191,26 +191,31 @@ def automate():
     
 
     browser = webdriver.Chrome()
+   
     browser.get(('https://accounts.google.com/ServiceLogin?'
-                'service=mail&continue=https://mail.google'
-                '.com/mail/#identifier'))
-
+                 'service=mail&continue=https://mail.google'
+                 '.com/mail/#identifier'))
+    
     # fill in username and hit the next button
-
+    
     username = browser.find_element_by_id('identifierId')
     username.send_keys(val1)
-
+    
     nextButton = browser.find_element_by_id('identifierNext')
     nextButton.click()
-
+    
     # wait for transition then continue to fill items
-
-    password = WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.NAME, "password")))
-
+    
+    password = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.NAME, "password")))
+    
     password.send_keys(val2)
-
+    
     signInButton = browser.find_element_by_id('passwordNext')
     signInButton.click()
+
+
+
 
 def clearfile():
     f = open('data.txt', "w")
